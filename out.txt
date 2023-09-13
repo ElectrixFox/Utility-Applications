@@ -1,0 +1,103 @@
+
+int ChangeEventsContact();
+int ChangeEventsContactMenu();
+int ChangeEventsContactName();
+int ChangeEventsContactEmailAddress();
+int ChangeEventsContactPhoneNumber();
+
+
+int ChangeEventsContact()
+{
+int changestatus = 0;
+while (changestatus != 4)
+	{
+	changestatus = ChangeEventsContactMenu();
+	clrscr();
+	} //endwhile
+
+getch();
+return 0;
+}
+
+
+int ChangeEventsContactMenu()
+{
+int changeeventscontactchoice;
+
+clrscr();
+
+cout << "\n\tChange Events Contact Menu";
+cout << "\n\t==========================\n";
+cout << "\n\t1. Name";
+cout << "\n\t2. Email Address";
+cout << "\n\t3. Phone Number";
+cout << "\n\t4. Return";
+
+cout << "\nEnter Choice: ";
+cin >> changeeventscontactchoice;
+
+switch(changeeventscontactchoice)
+	{
+	case 1: 
+		{
+		ChangeEventsContactName();
+		clrscr();
+		break;
+		} // endcase
+	case 2: 
+		{
+		ChangeEventsContactEmailAddress();
+		clrscr();
+		break;
+		} // endcase
+	case 3: 
+		{
+		ChangeEventsContactPhoneNumber();
+		clrscr();
+		break;
+		} // endcase
+	case 4: 
+		{
+		clrscr();
+		break;
+		} // endcase
+	}
+
+return changeeventscontactchoice;
+}
+
+int ChangeEventsContactName()
+{
+clrscr();
+cout << "\nChange Events Contact Name";
+cout << "\n==========================\n";
+
+cout << "\nPress any key to return";
+getch();
+
+return 0;
+}
+
+int ChangeEventsContactEmailAddress()
+{
+clrscr();
+cout << "\nChange Events Contact Email Address";
+cout << "\n===================================\n";
+
+cout << "\nPress any key to return";
+getch();
+
+return 0;
+}
+
+int ChangeEventsContactPhoneNumber()
+{
+clrscr();
+cout << "\nChange Events Contact Phone Number";
+cout << "\n==================================\n";
+
+cout << "\nPress any key to return";
+getch();
+
+return 0;
+}
