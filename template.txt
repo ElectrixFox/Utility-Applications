@@ -1,0 +1,43 @@
+int #x()
+{
+int #x = 0;
+while (#x != #y)
+	{
+	#x = #x();
+	clrscr();
+	} //endwhile
+
+getch();
+return 0;
+}
+
+int #x()
+{
+int #x1;
+
+clrscr();
+
+cout << "\n\t#x";
+cout << #menubar;
+cout << "\n\t1. #x";
+
+cout << "\nEnter Choice: ";
+cin >> #x1;
+
+switch(#x1)
+	{
+	case #x: 
+		{
+		x#();
+		clrscr();
+		break;
+		} // endcase
+	case #xe: 
+		{
+		clrscr();
+		break;
+		} // endcase
+	}
+
+return #x1;
+}
