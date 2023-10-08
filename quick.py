@@ -1,52 +1,64 @@
 fin = []
 out = []
 funcdefs = []
-inp = input("Option: ")
+layers = [[]]
 
-choice = ""
+# handle the line as it is read in
+def handleline(line):
+    # confirming the type
+    line = str(line)
 
-if(inp == "FILE"):
-    fp = input("Enter FilePath: ")
-    f = open(fp, "r")
+    # getting rid of whitespace
+    line = line.strip()
+    return line
 
+# generate the equals bar
+def getEqualsBar(title):
+    bar = ""
+
+    # add length + 5 equals signs
+    for i in range(0, len(title) + 5):
+        bar += "="
+
+    return bar
+
+# gets the file
+fp = input("Enter FilePath: ")
+
+if(fp.endswith(".txt") == False):
+    fp += ".txt"
+
+# opens the file
+f = open(fp, "r")
+
+
+# reads back the lines in the file
+ln = f.readline()
+print(ln)
+while(ln != ''):
+    tmplne = handleline(ln)
+    out.append(tmplne)
     ln = f.readline()
-    print(ln)
-    while(ln != ''):
-        out.append(ln.strip())
-        ln = f.readline()
-        
-    f.close()
-else:
-        out.append(inp)
-
-while inp != "q" and inp != "FILE":
-    inp = input()
     
-    if(inp != "q"):
-        out.append(inp)
+f.close()
 
-equ = ""
+equ = getEqualsBar(out[0])
 
-for i in range(0, len(out[0]) + 5):
-    equ += "="
+coutstarter = "cout << \"\\n\\t"
+strend = "\";"
 
-
-fin.append("cout << \"\\n\\t" + out[0] + " Menu" + "\";")
-fin.append("cout << \"\\n\\t" + equ + "\\n\";")
+fin.append(coutstarter + out[0] + " Menu" + strend)
+fin.append(coutstarter + equ + "\\n\";")
 
 
 p = len(out)
 
 for i in range(1, len(out)):
-    fin.append("cout << \"\\n\\t" + str(i) +". " + str(out[i]) + "\";")
+    fin.append(coutstarter + str(i) +". " + str(out[i]) + strend)
 
-fin.append("cout << \"\\n\\t" + str(p) + ". Return\";")
+fin.append(coutstarter + str(p) + ". Return\";")
 
-if(inp != "FILE"):
-    choice = input("Enter choice variable name: ")
-
-if(inp == "FILE"):
-    choice =  (str(out[0]).replace(" ", "")).lower() + "choice"
+choice =  (str(out[0]).replace(" ", "")).lower() + "choice"
 
 funcdefs.append(out[0].replace(" ", ""))
 funcdefs.append(out[0].replace(" ", "") + "Menu")
@@ -89,57 +101,47 @@ fin.append("\t}")
 fin.append("\nreturn " + str(choice) + ";\n}")
 
 fin2 = []
-motherfunc = input("Generate Mother Function (y/n): ")
 
 fst = out[0][0:out[0].find(" ")]
 
 stat = fst.lower() + "status"
-if motherfunc == "y" or motherfunc == "Y":
-    fin2.append("int " + funcdefs[0] + "()\n{")
-    fin2.append("int " + stat + " = 0;")
-    fin2.append("while (" + stat + " != " + str(len(out)) + ")\n\t{")
-    fin2.append("\t" + stat + " = " + funcdefs[1] + "();")
-    fin2.append("\tclrscr();\n\t} //endwhile")
-    fin2.append("\ngetch();")
-    fin2.append("return 0;")
-    fin2.append("}")
+fin2.append("int " + funcdefs[0] + "()\n{")
+fin2.append("int " + stat + " = 0;")
+fin2.append("while (" + stat + " != " + str(len(out)) + ")\n\t{")
+fin2.append("\t" + stat + " = " + funcdefs[1] + "();")
+fin2.append("\tclrscr();\n\t} //endwhile")
+fin2.append("\ngetch();")
+fin2.append("return 0;")
+fin2.append("}")
 
 decs = ""
 
-if motherfunc != "Y":
-    decs = input("Generate Function Declarations (y/n): ")
-
 fin3 = []
-if decs == "y" or motherfunc == "Y":
-     for i in range(0, len(funcdefs)):  
-        fin3.append("int " + funcdefs[i] + "();")
+for i in range(0, len(funcdefs)):  
+    fin3.append("int " + funcdefs[i] + "();")
     
 
 defs = ""
 
-if motherfunc != "Y":
-    defs = input("Generate Function Definitions (y/n): ")
-
 fin4 = []
-if defs == "y" or motherfunc == "Y":
-    for i in range(1, len(out)):
-        fin4.append("\nint " + funcdefs[i+1] + "()\n{")
-        
-        outs = str(out[i])
-        
-        if(out[0].find("View") != -1):
-            outs = out[0] + " " + outs
-        if(out[0].find("Change") != -1):
-            outs = out[0] + " " + outs
-        
-        equ2 = ""
-        for j in range(0, len(outs)):
-            equ2 += "="
+for i in range(1, len(out)):
+    fin4.append("\nint " + funcdefs[i+1] + "()\n{")
+    
+    outs = str(out[i])
+    
+    if(out[0].find("View") != -1):
+        outs = out[0] + " " + outs
+    if(out[0].find("Change") != -1):
+        outs = out[0] + " " + outs
+    
+    equ2 = ""
+    for j in range(0, len(outs)):
+        equ2 += "="
 
-        fin4.append("clrscr();\ncout << \"\\n" + outs + "\";")
-        fin4.append("cout << \"\\n" + equ2 + "\\n\";\n")
-        fin4.append("cout << \"\\nPress any key to return\";\ngetch();")
-        fin4.append("\nreturn 0;\n}")
+    fin4.append("clrscr();\ncout << \"\\n" + outs + strend)
+    fin4.append("cout << \"\\n" + equ2 + "\\n\";\n")
+    fin4.append("cout << \"\\nPress any key to return\";\ngetch();")
+    fin4.append("\nreturn 0;\n}")
 
 fout = open("out.txt", "w")
 

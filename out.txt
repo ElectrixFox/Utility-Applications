@@ -1,0 +1,103 @@
+
+int ViewHolidays();
+int ViewHolidaysMenu();
+int ViewHolidaysByDJ();
+int ViewHolidaysByDate();
+int ViewHolidaysByUnapproved();
+
+
+int ViewHolidays()
+{
+int viewstatus = 0;
+while (viewstatus != 4)
+	{
+	viewstatus = ViewHolidaysMenu();
+	clrscr();
+	} //endwhile
+
+getch();
+return 0;
+}
+
+
+int ViewHolidaysMenu()
+{
+int viewholidayschoice;
+
+clrscr();
+
+cout << "\n\tView Holidays Menu";
+cout << "\n\t==================\n";
+cout << "\n\t1. By DJ";
+cout << "\n\t2. By Date";
+cout << "\n\t3. By Unapproved";
+cout << "\n\t4. Return";
+
+cout << "\nEnter Choice: ";
+cin >> viewholidayschoice;
+
+switch(viewholidayschoice)
+	{
+	case 1: 
+		{
+		ViewHolidaysByDJ();
+		clrscr();
+		break;
+		} // endcase
+	case 2: 
+		{
+		ViewHolidaysByDate();
+		clrscr();
+		break;
+		} // endcase
+	case 3: 
+		{
+		ViewHolidaysByUnapproved();
+		clrscr();
+		break;
+		} // endcase
+	case 4: 
+		{
+		clrscr();
+		break;
+		} // endcase
+	}
+
+return viewholidayschoice;
+}
+
+int ViewHolidaysByDJ()
+{
+clrscr();
+cout << "\nView Holidays By DJ";
+cout << "\n===================\n";
+
+cout << "\nPress any key to return";
+getch();
+
+return 0;
+}
+
+int ViewHolidaysByDate()
+{
+clrscr();
+cout << "\nView Holidays By Date";
+cout << "\n=====================\n";
+
+cout << "\nPress any key to return";
+getch();
+
+return 0;
+}
+
+int ViewHolidaysByUnapproved()
+{
+clrscr();
+cout << "\nView Holidays By Unapproved";
+cout << "\n===========================\n";
+
+cout << "\nPress any key to return";
+getch();
+
+return 0;
+}
