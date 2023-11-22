@@ -1,17 +1,19 @@
 
-int ViewHolidays();
-int ViewHolidaysMenu();
-int ViewHolidaysByDJ();
-int ViewHolidaysByDate();
-int ViewHolidaysByUnapproved();
+int IDontKnow();
+int IDontKnowMenu();
+int ByBobbins();
+int SmellyWelly();
+int Mark();
+int Jeffery();
+int Answer();
 
 
-int ViewHolidays()
+int IDontKnow()
 {
-int viewstatus = 0;
-while (viewstatus != 4)
+int idontknostatus = 0;
+while (idontknostatus != 6)
 	{
-	viewstatus = ViewHolidaysMenu();
+	idontknostatus = IDontKnowMenu();
 	clrscr();
 	} //endwhile
 
@@ -20,57 +22,71 @@ return 0;
 }
 
 
-int ViewHolidaysMenu()
+int IDontKnowMenu()
 {
-int viewholidayschoice;
+int idontknowchoice;
 
 clrscr();
 
-cout << "\n\tView Holidays Menu";
-cout << "\n\t==================\n";
-cout << "\n\t1. By DJ";
-cout << "\n\t2. By Date";
-cout << "\n\t3. By Unapproved";
-cout << "\n\t4. Return";
+cout << "\n\tIDontKnow Menu";
+cout << "\n\t==============\n";
+cout << "\n\t1. By Bobbins";
+cout << "\n\t2. Smelly Welly";
+cout << "\n\t3. Mark";
+cout << "\n\t4. Jeffery";
+cout << "\n\t5. Answer";
+cout << "\n\t6. Return";
 
 cout << "\nEnter Choice: ";
-cin >> viewholidayschoice;
+cin >> idontknowchoice;
 
-switch(viewholidayschoice)
+switch(idontknowchoice)
 	{
 	case 1: 
 		{
-		ViewHolidaysByDJ();
+		ByBobbins();
 		clrscr();
 		break;
 		} // endcase
 	case 2: 
 		{
-		ViewHolidaysByDate();
+		SmellyWelly();
 		clrscr();
 		break;
 		} // endcase
 	case 3: 
 		{
-		ViewHolidaysByUnapproved();
+		Mark();
 		clrscr();
 		break;
 		} // endcase
 	case 4: 
+		{
+		Jeffery();
+		clrscr();
+		break;
+		} // endcase
+	case 5: 
+		{
+		Answer();
+		clrscr();
+		break;
+		} // endcase
+	case 6: 
 		{
 		clrscr();
 		break;
 		} // endcase
 	}
 
-return viewholidayschoice;
+return idontknowchoice;
 }
 
-int ViewHolidaysByDJ()
+int ByBobbins()
 {
 clrscr();
-cout << "\nView Holidays By DJ";
-cout << "\n===================\n";
+cout << "\nBy Bobbins";
+cout << "\n==========\n";
 
 cout << "\nPress any key to return";
 getch();
@@ -78,11 +94,11 @@ getch();
 return 0;
 }
 
-int ViewHolidaysByDate()
+int SmellyWelly()
 {
 clrscr();
-cout << "\nView Holidays By Date";
-cout << "\n=====================\n";
+cout << "\nSmelly Welly";
+cout << "\n============\n";
 
 cout << "\nPress any key to return";
 getch();
@@ -90,11 +106,35 @@ getch();
 return 0;
 }
 
-int ViewHolidaysByUnapproved()
+int Mark()
 {
 clrscr();
-cout << "\nView Holidays By Unapproved";
-cout << "\n===========================\n";
+cout << "\nMark";
+cout << "\n====\n";
+
+cout << "\nPress any key to return";
+getch();
+
+return 0;
+}
+
+int Jeffery()
+{
+clrscr();
+cout << "\nJeffery";
+cout << "\n=======\n";
+
+cout << "\nPress any key to return";
+getch();
+
+return 0;
+}
+
+int Answer()
+{
+clrscr();
+cout << "\nAnswer";
+cout << "\n======\n";
 
 cout << "\nPress any key to return";
 getch();

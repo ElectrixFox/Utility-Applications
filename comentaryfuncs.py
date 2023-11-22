@@ -9,6 +9,18 @@ if ".cpp" not in fn:
 print(fn)
 f = open(fn, "r")
 
+def identifyProcedure(line):
+    types = [ "int", "char", "void" ]
+
+    testingword = line.partition(' ')[0]
+
+    for i in range(0, len(types)):
+        if types[i] in testingword:
+            return True
+        else:
+            return False
+
+
 def fnd(x):
     pattern = r'\b\w+\b\s+(\w+)\s*\('
     match = re.search(pattern, ln)
@@ -24,10 +36,9 @@ lns = []
 ln = f.readline()
 
 while "int main" not in ln:
-
-    if "#define" not in ln:
+    if(identifyProcedure(ln) == True):
         match = fnd(ln)
-
+        print(ln)
         if match:
             lns.append(match)
 
