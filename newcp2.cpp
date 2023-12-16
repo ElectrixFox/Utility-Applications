@@ -622,37 +622,37 @@ switch(choice)
                 DJs();
                 clrscr();
                 break;
-                } //endcase
+                } // endcase
         case 2:
                 {
                 Guests();
                 clrscr();
                 break;
-                } //endcase
+                } // endcase
         case 3:
                 {
                 Music();
                 clrscr();
                 break;
-                } //endcase
+                } // endcase
         case 4:
                 {
                 Events();
                 clrscr();
                 break;
-                } //endcase
+                } // endcase
         case 5:
                 {
                 Scheduling();
                 clrscr();
                 break;
-                } //endcase
+                } // endcase
         case 6:
                 {
                 clrscr();
                 break;
-                } //endcase
-        } //endswitch
+                } // endcase
+        }
 
 return choice;
 }
@@ -761,30 +761,30 @@ switch(djchoice)
 		ViewDJ();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2:
 		{
 		AddDJ();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3:
 		{
 		ChangeDJ();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 4:
 		{
 		RemoveDJ();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 5:
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	} //endswitch
 
 return djchoice;
@@ -835,24 +835,24 @@ switch(vidjch)
 		ViewDJByName();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		ViewByDJNumber();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		ViewDJByMusicStyle();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 4: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return vidjch;
@@ -1114,36 +1114,36 @@ switch(chandjch)
 		ChangeDJName();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		ChangeDJPerformanceName();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		ChangeDJPhoneNumber();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 4: 
 		{
 		ChangeDJEmailAddress();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 5: 
 		{
 		ChangeDJMusicStyle();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 6: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return chandjch;
@@ -1556,30 +1556,30 @@ switch(guch)
 		ViewGuest();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		AddGuest();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		ChangeGuest();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 4: 
 		{
 		RemoveGuest();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 5: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return guch;
@@ -1629,30 +1629,30 @@ switch(viguch)
 		ViewGuestByName();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		ViewGuestByGuestNumber();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		ViewGuestNextAppearance();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 4: 
 		{
 		ViewGuestByNextAppearance();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 5: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return viguch;
@@ -1906,30 +1906,30 @@ switch(changeguch)
 		ChangeGuestName();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		ChangeGuestContactName();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		ChangeGuestContactPhoneNumber();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 4: 
 		{
 		ChangeGuestContactEmailAddress();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 5: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return changeguch;
@@ -2135,7 +2135,7 @@ if(choice != 'y')
 	getch();
 
 	return 0;
-	} //endif
+	}
 
 // shuffle all the guests back one space
 for (del = find; del < ngi; del++)
@@ -2490,18 +2490,18 @@ switch(musicchoice)
 		Catalogue();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		Playlists();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return musicchoice;
@@ -2552,30 +2552,30 @@ switch(catchoice)
 		ViewCatalogue();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		CatalogueAddMusic();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		CatalogueChangeMusic();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 4: 
 		{
 		CatalogueRemoveMusic();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 5: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return catchoice;
@@ -2627,36 +2627,36 @@ switch(viewcatch)
 		ViewCatalogueByCatalogueNumber();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		ViewCatalogueByTitle();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		ViewCatalogueByArtist();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 4: 
 		{
 		ViewCatalogueByGenre();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 5: 
 		{
 		ViewCatalogueByPopularity();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 6: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return viewcatch;
@@ -2974,36 +2974,36 @@ switch(changemusicchoice)
 		ChangeMusicTitle();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		ChangeMusicArtist();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		ChangeMusicPlaytime();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 4: 
 		{
 		ChangeMusicGenre();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 5: 
 		{
 		ChangeMusicCheck();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 6: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return changemusicchoice;
@@ -3487,30 +3487,30 @@ switch(playlistschoice)
 		ViewPlaylist();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		CreatePlaylist();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		EditPlaylist();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 4: 
 		{
 		RemovePlaylist();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 5: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return playlistschoice;
@@ -3794,18 +3794,18 @@ switch(editplaylistchoice)
 		AddMusic();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		RemoveMusic();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return editplaylistchoice;
@@ -4943,36 +4943,36 @@ switch(eventschoice)
 		ViewEvents();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		AddEvent();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		ChangeEvents();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 4: 
 		{
 		RemoveEvents();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 5: 
 		{
 		AllocateDJs();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 6: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return eventschoice;
@@ -5023,24 +5023,24 @@ switch(vieweventschoice)
 		ViewEventsByEventReference();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		ViewEventsByDate();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		ViewEventsByTitle();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 4: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return vieweventschoice;
@@ -5194,30 +5194,30 @@ switch(addeventchoice)
 		DJSession();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		GuestAppearance();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		ExternalEvent();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 4: 
 		{
 		Replay();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 5: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return addeventchoice;
@@ -5689,54 +5689,54 @@ switch(changeeventchoice)
 		ChangeEventsTitle();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		ChangeEventsDate();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		ChangeEventsTime();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 4: 
 		{
 		ChangeEventsLocation();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 5: 
 		{
 		ChangeEventsDescription();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 6: 
 		{
 		ChangeEventsCost();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 7: 
 		{
 		ChangeEventsContact();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 8: 
 		{
 		ChangeEventsPlaylist();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 9: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return changeeventchoice;
@@ -6104,24 +6104,24 @@ switch(chevcontch)
 		ChangeEventsContactName();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		ChangeEventsContactEmailAddress();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		ChangeEventsContactPhoneNumber();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 4: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return chevcontch;
@@ -7227,18 +7227,18 @@ switch(schedulingchoice)
 		Schedule();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		Holidays();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return schedulingchoice;
@@ -7289,30 +7289,30 @@ switch(schedulechoice)
 		ViewSchedule();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		CreateSchedule();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		ClearSchedule();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 4: 
 		{
 		EditSchedule();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 5: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return schedulechoice;
@@ -7361,24 +7361,24 @@ switch(viewschedulechoice)
 		ViewScheduleByDJ();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		ViewScheduleAvailabilityByDJ();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		ViewScheduleGuestSlots();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 4: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return viewschedulechoice;
@@ -7791,18 +7791,18 @@ switch(editschedulechoice)
 		ChangeDJAvailability();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		GuestSlots();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return editschedulechoice;
@@ -8034,36 +8034,36 @@ switch(holidayschoice)
 		ViewHolidays();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		BookHolidays();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		ChangeHolidays();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 4: 
 		{
 		RemoveHolidays();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 5: 
 		{
 		ApproveHolidays();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 6: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return holidayschoice;
@@ -8113,24 +8113,24 @@ switch(vholch)
 		ViewHolidaysByDJ();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		ViewHolidaysByDate();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		ViewHolidaysByUnapproved();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 4: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return vholch;
@@ -8383,18 +8383,18 @@ switch(changeholidayschoice)
 		ChangeHolidaysStartDate();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 2: 
 		{
 		ChangeHolidaysEndDate();
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	case 3: 
 		{
 		clrscr();
 		break;
-		} //endcase
+		} // endcase
 	}
 
 return changeholidayschoice;
