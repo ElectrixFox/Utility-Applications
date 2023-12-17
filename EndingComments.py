@@ -1,7 +1,6 @@
 import os
 
-fp = ""
-os.system("cls")
+prefstyle = " //"
 
 def ContainsType(line):
     types = [ "int", "char", "float", "void" ]
@@ -68,7 +67,7 @@ def isSelection(line):
             fpos = pos
         pos +=1
 
-    if not (fpos < len(lsplit) - 1):
+    if not (fpos < len(lsplit) - 1) and target != "default":
         return 0
 
     if target == "case":
@@ -87,7 +86,7 @@ def isSelection(line):
             if lsplit[fpos][lsplit[fpos].find(target) - 1].isalpha():
                 return 0
             
-    #print(line, end = '\0')
+    # print(line, end = '\0')
 
     return target
 
@@ -138,7 +137,9 @@ def LoopUntilEnding(lines, st, en, out):
             if hasend != 1:
                 if out == 1:
                     print(f"Missing {hasend} on line {i + 1}")
-                lines[i] = hasend
+
+                # removes the new line from the end of the line, adds the comment style to the ending and then adds the new line at the end
+                lines[i] = lines[i].replace("\n", "") + prefstyle + hasend + '\n'
             else:
                 print(f"Found ending on line {i+1}")
 
@@ -147,34 +148,34 @@ def LoopUntilEnding(lines, st, en, out):
 
     return i 
 
-fp = "cp6.cpp"
+def CommentMenu():
+    fp = ""
+    os.system("CLS")
 
-fp = input("Enter File Path: ")
+    fp = input("Enter File Path: ")
+    output = 0
 
-codefile = open(fp, 'r')
+    codefile = open(fp, 'r')
+    flecont = codefile.readlines()
+    codefile.close()
 
-flecont = codefile.readlines()
+    print("1. Display Error Locations")
+    print("2. Write new changes to new file")
+    print("3. Write new changes to file")
 
-codefile.close()
+    choice = input("Enter choice: ")
 
-print("1. Display Error Locations")
-print("2. Write new changes to new file")
-print("3. Write new changes to file")
+    if choice == "1":
+        output = 1
 
-choice = input("Enter choice: ")
+    # loops through finding and checking for selection statments with no ending comments
+    LoopUntilEnding(flecont, 0, len(flecont)-1, output)
 
-output = 0
-
-if choice == "1":
-    output = 1
-
-LoopUntilEnding(flecont, 0, len(flecont)-1, output)
-
-if choice == "2":
-    ncodefile = open("new" + fp, 'w')
-
-    ncodefile.writelines(flecont)
-
-    ncodefile.close()
-
-
+    if choice == "2":
+        ncodefile = open("new" + fp, 'w')
+        ncodefile.writelines(flecont)
+        ncodefile.close()
+    elif choice == "3":
+        ncode = open(fp, 'w')
+        ncode.writelines(flecont)
+        ncode.close()

@@ -1,3 +1,24 @@
+/******************************************************************************
+Program:        Prototype
+File:           Prototype.cpp
+Functions:      				ChangeDJEmailAddress, ChangeDJMusicStyle, 
+				ChangeDJPerformanceName, ChangeDJPhoneNumber, 
+ChangeDJ, ChangeDJMenu, ChangeDJName, 
+Description:    
+Author:         Luke Phillips
+Environment:    Borland C++ Pro 6.0
+Notes:			
+Revisions:      18/07/2023
+******************************************************************************/
+
+int ChangeDJ();
+int ChangeDJMenu();
+int ChangeDJName();
+int ChangeDJPerformanceName();
+int ChangeDJPhoneNumber();
+int ChangeDJEmailAddress();
+int ChangeDJMusicStyle();
+
 int GenerateDJNumber()
 {
 int count;
