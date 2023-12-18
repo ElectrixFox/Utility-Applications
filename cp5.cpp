@@ -1,15 +1,17 @@
 /******************************************************************************
 Program:        Prototype
 File:           Prototype.cpp
-Functions:      				ChangeDJEmailAddress, ChangeDJMusicStyle, 
-				ChangeDJPerformanceName, ChangeDJPhoneNumber, 
-ChangeDJ, ChangeDJMenu, ChangeDJName, 
+Functions:      
 Description:    
 Author:         Luke Phillips
 Environment:    Borland C++ Pro 6.0
 Notes:			
 Revisions:      18/07/2023
 ******************************************************************************/
+
+#include <fstream>
+#include <iostream>
+#include <string.h>
 
 int ChangeDJ();
 int ChangeDJMenu();
@@ -18,6 +20,10 @@ int ChangeDJPerformanceName();
 int ChangeDJPhoneNumber();
 int ChangeDJEmailAddress();
 int ChangeDJMusicStyle();
+
+using namespace std;
+#define clrscr() system("cls")
+#define getch() cin.get()
 
 int GenerateDJNumber()
 {

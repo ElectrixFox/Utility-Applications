@@ -36,7 +36,6 @@ def getFunctionName(line):
 def getFunctionType(line):
     return ec.ContainsType(line)
 
-
 def FindAllFunctions(lines):
     functions = []
     for line in lines:
@@ -65,7 +64,7 @@ def FunctionsMenu():
     os.system("cls")
     fp = input("Enter File Path: ")
 
-    numperline = input("Enter the number of functions per line: ")
+    numperline = int(input("Enter the number of functions per line: "))
 
     cfile = open(fp, 'r')
     lines = cfile.readlines()
@@ -79,35 +78,42 @@ def FunctionsMenu():
             print(funcs[i], end=' \0')
 
             # adding the new line
-            if i % int(numperline) == 0:
+            if i % numperline == 0:
                 print()
     elif choice == "2":
         i = 0
-        while "Function" not in lines[i]:
+        while "Functions:" not in lines[i]:
             i += 1
 
             if i == nlines:
                 break
-        if i < nlines:
+        if (i < nlines) and (len(lines[i].split()) > 1):
+                print("Warning: You must clear the functions currently in the commentary for this to work properly")
+                isclear = input("Is this line clear (y/n): ")
+                
+                if isclear != 'y':
+                    return
+
+        if i < nlines:             
             lines[i] = lines[i].replace("\n", "")
             ntabs = 4
 
             final = ""
-            for j in range(0, len(funcs)): 
-                final += funcs[j] + separator
+            final += funcs[0] + separator
+            for j in range(1, len(funcs)):
 
-                if j == 0:
-                    continue
-
-                # adding the new line
-                if j % int(numperline) == 0:
+                # adding the new line if it should be added
+                if j % numperline == 0:
                     final += '\n'
-                    lines.insert(i + 1, final)
-                    final = ""
-                    final = ntabs * '\t'
-                    print(final + '1')
+                    final += ntabs * "\t"
+                
+                final += funcs[j] 
+                
+                if j != len(funcs) - 1:
+                    final += separator
 
-            print(lines)
+
+            lines[i] += final + '\n'
 
             cfile = open(fp, 'w')
             cfile.writelines(lines)
