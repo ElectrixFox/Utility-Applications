@@ -20,12 +20,58 @@ def FindEndOfScope(lines, linenum):
         # if returned to origional depth then return the line on which this happened
         if depth == 0:
             return i
-        
 
-def ProcessTemplateMenuLoop(lines):
+# parse for the first layer
+# then treat layer 2 as layer 1 and repeat until max layers
+def ParseMenuStructure(fp, nlayer):
+    menfle = open(fp, 'r')
+    lines = menfle.readlines()
+    menfle.close()
+
+    mennams = []
+
+    for line in lines:
+        print(line, end = '\0')
+
+    for line in lines:
+        if line.count("#") == nlayer:
+            name = line.replace("\n", "")
+            name = name.replace("#", "")
+            mennams.append(name)
+    mendict = dict()
+
+    for nme in mennams:
+        mendict[nme] = []
+
+    curmen = ""
+    for line in lines:
+        if line.count("#") == nlayer:
+            curmen = line.replace("\n", "")
+            curmen = curmen.replace("#", "")
+        elif line.count("#") == (nlayer + 1):
+            mendict[curmen].append(line)
+
+    return mendict
+
+def GetMenuName(mendict, mennum):
+    mendict = dict(mendict)
+    keys = list(mendict.keys())
+
+    return keys[mennum]
+
+def GetOptionCount(mendict, mennum):
+    mendict = dict(mendict)
+    keys = list(mendict.keys())
+
+    return len(mendict[keys[mennum]])
+
+def ProcessTemplateMenuLoop(lines, mendict):
     nlines = 0
     scpestart = 0
     scpeend = 0
+    menfunclnes = []
+    menstatlines = []
+    menfunccallslines = []
 
     nlines = len(lines)
 
@@ -37,23 +83,61 @@ def ProcessTemplateMenuLoop(lines):
             # starting 1 after to acount for the actual function name (int MainMenu())
             scpestart = i + 1
             break
-
+    
     print(lines[scpestart])
     
     scpeend = FindEndOfScope(lines, scpestart)
 
-    print(lines[scpeend])
+    menfunclnes = lines[scpestart:scpeend + 1]
 
-    print(f"Scope starts at line {scpestart + 1} and ends at line {scpeend + 1}")
+    menname = GetMenuName(mendict, 0)
+    endnum = GetOptionCount(mendict, 0)
+
+    # To-Do: change this so that it does the replacement as it finds them
+    for i in range(scpestart, scpeend):
+        line = lines[i]
+        if "ID_menustatus" in line:
+            menstatlines.append(i)
+            if "ID_end" in line:
+                menfunclnes[i - scpestart] = menfunclnes[i - scpestart].replace("ID_end", str(endnum))
+        if "ID_MenuFunction();" in line:
+            menfunccallslines.append(i)
+
+    for line in menfunclnes:
+        print(line)
+
+
+    statusvar = menname.lower() + "status"
     
+    # changing the name of the function
+    menfunclnes[0] = menfunclnes[0].replace("ID_MenuLoop()", menname + "()")
 
+    # replacing all of the status variables
+    for ln in menstatlines:
+        menfunclnes[ln - scpestart] = menfunclnes[ln - scpestart].replace("ID_menustatus", statusvar)
+
+    # replacing the function calls
+    for ln in menfunccallslines:
+        menfunclnes[ln - scpestart] = menfunclnes[ln - scpestart].replace("ID_MenuFunction();", menname + "Menu();")
+    
+    for line in menfunclnes:
+        print(line, end = '\0')
 
 # ideally this will require a template cpp to get format from
 def MenuBuilderMenu():
     choice = ""
-    fp = ""
+    fp = "TemplateLayout.cpp"
 
     clrscr()
+
+    cfile = open(fp, 'r')
+    lines = cfile.readlines()
+    cfile.close()
+
+    mendict = ParseMenuStructure("MenuContent.txt")
+
+    ProcessTemplateMenuLoop(lines, mendict)
+    return "3"
 
     print("\tMenu Builder Menu")
     print("\t=================")
