@@ -26,5 +26,15 @@ clrscr();
 cout << "Enter Choice: ";
 cin >> ID_choice;
 
+switch (ID_choice)
+    {
+    case 1:
+        {
+        ID_MenuOption();
+        clrscr();
+        break;
+        }
+    }
+
 return ID_choice;
 }

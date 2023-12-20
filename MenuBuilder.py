@@ -123,6 +123,8 @@ def ProcessTemplateMenuLoop(lines, mendict):
     for line in menfunclnes:
         print(line, end = '\0')
 
+    
+
 # ideally this will require a template cpp to get format from
 def MenuBuilderMenu():
     choice = ""
@@ -134,7 +136,7 @@ def MenuBuilderMenu():
     lines = cfile.readlines()
     cfile.close()
 
-    mendict = ParseMenuStructure("MenuContent.txt")
+    mendict = ParseMenuStructure("MenuContent.txt", 1)
 
     ProcessTemplateMenuLoop(lines, mendict)
     return "3"
@@ -161,8 +163,7 @@ def MenuBuilderMenu():
     if choice == "1":
         ProcessTemplateMenuLoop(lines)
 
-    input("Press any key to return")
-    
+    input("Press any key to return")  
 
 ch = ""
 while ch != "3":
