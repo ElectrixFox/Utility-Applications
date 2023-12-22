@@ -123,7 +123,8 @@ def ProcessTemplateMenuLoop(lines, mendict):
     for line in menfunclnes:
         print(line, end = '\0')
 
-    
+def ProcessTemplateMenuFunctions(lines, mendict):
+
 
 # ideally this will require a template cpp to get format from
 def MenuBuilderMenu():
