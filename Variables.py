@@ -1,9 +1,14 @@
+import pandas as pd
 
-codefile = open("cp7.cpp", 'r')
-
+codefile = open("cp.cpp", 'r')
 types = [ "int", "char", "float", "void" ]
 
 prams_bottom = -1
+
+var_names = []
+var_types = []
+var_scope = []
+var_funcs = []
 
 def ContainsType(line):
     types = [ "int", "char", "float", "void" ]
@@ -36,6 +41,9 @@ def isFunction(line):
     
     # if the line doesn't contain a type then return
     if ContainsType(line) == 0:
+        return 0
+    
+    if "=" in line:
         return 0
     
     # if the line doesn't contain an open bracket for starting the function
@@ -110,6 +118,11 @@ def GetParams(line):
         if ")" in sepvar[1]:
             sepvar[1] = sepvar[1][:-1]
 
+        # if there is a size in the separated variable
+        if "[" in sepvar[1]:
+            index = sepvar[1].find("[")
+            sepvar[1] = sepvar[1][:index]
+        
         # setting up the variable
         var = [sepvar[0], sepvar[1]]
 
@@ -135,12 +148,15 @@ def GetVariable(line):
 
     if "[" in line:
         size = SeparateSizes(parts[1], parts[0])
+
+        index = parts[1].find("[")
+        parts[1] = parts[1][:index]
         
     if ";" in parts[1]:
         parts[1] = parts[1][:-1]
 
     return parts[:2]
-        
+
 # the active function
 actfunc = ""
 scope = "Global"
@@ -160,6 +176,10 @@ for line in codefile:
 
         # prints params
         for param in params:
+            var_names.append(param[1])
+            var_types.append(param[0])
+            var_scope.append(scope)
+            var_funcs.append(actfunc)
             print(f"{param[1]} {param[0]} {scope} {actfunc}")
     else:
         var = []
@@ -168,4 +188,21 @@ for line in codefile:
                 var = GetVariable(line) 
 
         if(len(var) == 2):
+            var_names.append(var[1])
+            var_types.append(var[0])
+            var_scope.append(scope)
+            var_funcs.append(actfunc)
             print(f"{var[1]} {var[0]} {scope} {actfunc}")
+
+
+data = {
+    'Variable Name': var_names,
+    'Type': var_types,
+    'Scope': var_scope,
+    'Functions': var_funcs
+}
+
+
+df = pd.DataFrame(data)
+
+df.to_excel("Variables.xlsx", index=False)
