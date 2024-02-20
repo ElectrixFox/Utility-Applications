@@ -1,8 +1,52 @@
-codefile = open("cp.cpp", 'r')
+
+codefile = open("cp7.cpp", 'r')
 
 types = [ "int", "char", "float", "void" ]
 
+prams_bottom = -1
+
+def ContainsType(line):
+    types = [ "int", "char", "float", "void" ]
+    line = str(line)
+    
+    lnsplit = line.split()
+
+    for type in types:
+        if type in lnsplit:
+            return type
+    
+    return 0
+
+def isStartingNewScope(line):
+    line = str(line)
+
+    if ContainsType(line) != 0:
+        return 0
+
+    if "{" in line:
+        return 1
+    elif "}" in line:
+        return -1
+    
+    return 0
+
+# currently doesn't account for: (Type) (Name) = (Function)(Params) 
+def isFunction(line):
+    line = str(line)
+    
+    # if the line doesn't contain a type then return
+    if ContainsType(line) == 0:
+        return 0
+    
+    # if the line doesn't contain an open bracket for starting the function
+    if "(" not in line or ")" not in line:
+        return 0
+
+    return 1
+
 def SeparateSizes(typ, vardec):
+    final = []
+
     if "[" not in vardec:
         if typ == "int":
             final = "short"
@@ -10,7 +54,6 @@ def SeparateSizes(typ, vardec):
         return final
 
     splited = vardec.split("[")[1:]
-    final = []
 
     for item in splited:
         if ";" in item:
@@ -22,7 +65,61 @@ def SeparateSizes(typ, vardec):
     
     return final
 
-def GetVarName(line):
+def GetFunction(line):
+    parts = line.split()
+
+    for item in parts:
+        if "(" in item:
+            index = item.find("(")
+            item = item[:index]
+            return item
+        
+    return ""
+
+def GetParams(line):
+    # array of parameters
+    params = []
+
+    # finds the first open bracket
+    index = line.find("(")
+
+    if((prams_bottom == 1) and (";" in line)):
+        return []
+    elif((prams_bottom == 0) and (";" not in line)):
+        return []
+
+    # stop if there are no params
+    if "()" in line[index:]:
+        return []
+
+    # split the line to only being after the ( in the function declaration
+    line = line[(index + 1):]    
+    
+    # split at every comma
+    parts = line.split(",")
+
+    # loop through each param and get it's type and name
+    for item in parts:
+        # separating the variable
+        sepvar = item.split()
+
+        # removing ; first as it removes the last char not the exact char
+        if ";" in sepvar[1]:
+            sepvar[1] = sepvar[1][:-1]
+
+        if ")" in sepvar[1]:
+            sepvar[1] = sepvar[1][:-1]
+
+        # setting up the variable
+        var = [sepvar[0], sepvar[1]]
+
+        # adding the variable to the parameters
+        params.append(var)
+
+
+    return params
+
+def GetVariable(line):
     parts = line.split()
 
     ftype = ""
@@ -31,21 +128,44 @@ def GetVarName(line):
 
     ftype = parts[0]
 
-
     if parts[1][0].isupper() == True:
-        return
+        return []
     elif "main" in parts[1]:
-        return
-    
-    varnam = parts[1]
-    if "[" in line:
-        size = SeparateSizes(parts[1])
-        print(size)
-        
-    print(f"{ftype} {varnam}")
-        
+        return []
 
+    if "[" in line:
+        size = SeparateSizes(parts[1], parts[0])
+        
+    if ";" in parts[1]:
+        parts[1] = parts[1][:-1]
+
+    return parts[:2]
+        
+# the active function
+actfunc = ""
+scope = "Global"
 for line in codefile:
-    for type in types:
-        if line.startswith(type):
-            GetVarName(line)
+    if(actfunc != ""):
+        scope = "Local"
+    
+    # finds the next function
+    if(isFunction(line) == 1):
+        # sets the new active function
+        actfunc = GetFunction(line)
+
+        # gets params
+        params = GetParams(line[:-1])
+
+        scope = "Parameter"
+
+        # prints params
+        for param in params:
+            print(f"{param[1]} {param[0]} {scope} {actfunc}")
+    else:
+        var = []
+        for type in types:
+            if line.startswith(type):
+                var = GetVariable(line) 
+
+        if(len(var) == 2):
+            print(f"{var[1]} {var[0]} {scope} {actfunc}")
