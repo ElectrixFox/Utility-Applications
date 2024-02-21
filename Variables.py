@@ -1,6 +1,6 @@
 import pandas as pd
 
-codefile = open("cp.cpp", 'r')
+codefile = open("cp8.cpp", 'r')
 types = [ "int", "char", "float", "void" ]
 
 prams_bottom = -1
@@ -38,9 +38,16 @@ def isStartingNewScope(line):
 # currently doesn't account for: (Type) (Name) = (Function)(Params) 
 def isFunction(line):
     line = str(line)
+
+    # splits the line down
+    parts = line.split()
     
+    # checks if the line is empty
+    if len(parts) == 0:
+        return 0
+
     # if the line doesn't contain a type then return
-    if ContainsType(line) == 0:
+    if ContainsType(parts[0]) == 0:
         return 0
     
     if "=" in line:
@@ -168,6 +175,9 @@ for line in codefile:
     if(isFunction(line) == 1):
         # sets the new active function
         actfunc = GetFunction(line)
+
+        print("Line: ", line)
+        print("Line: ", line[:-1])
 
         # gets params
         params = GetParams(line[:-1])
