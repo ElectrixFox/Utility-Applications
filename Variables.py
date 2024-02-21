@@ -1,6 +1,6 @@
 import pandas as pd
 
-codefile = open("cp8.cpp", 'r')
+codefile = open("cp9.cpp", 'r')
 types = [ "int", "char", "float", "void" ]
 
 prams_bottom = -1
@@ -145,8 +145,6 @@ def GetVariable(line):
     ftype = ""
     varnam = ""
     size = ""
-
-    ftype = parts[0]
 
     if parts[1][0].isupper() == True:
         return []
