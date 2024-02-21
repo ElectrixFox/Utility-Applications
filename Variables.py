@@ -56,6 +56,11 @@ def isFunction(line):
     # if the line doesn't contain an open bracket for starting the function
     if "(" not in line or ")" not in line:
         return 0
+    
+    # checks if there is a ; and a ) then the ; must be after the )
+    if (")" in line) and (";" in line):
+        if (line.find(";") < line.find(")")):
+            return 0
 
     return 1
 
@@ -177,8 +182,13 @@ for line in codefile:
         print("Line: ", line)
         print("Line: ", line[:-1])
 
+        print(line)
+
         # gets params
         params = GetParams(line[:-1])
+
+        print("Split: ", line[:-1])
+        print("Params: ", params)
 
         scope = "Parameter"
 
