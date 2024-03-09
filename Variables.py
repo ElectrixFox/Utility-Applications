@@ -1,6 +1,6 @@
 import pandas as pd
 
-codefile = open("cp9.cpp", 'r')
+codefile = open("cp10.cpp", 'r')
 types = [ "int", "char", "float", "void" ]
 
 prams_bottom = -1
@@ -167,60 +167,121 @@ def GetVariable(line):
 
     return parts[:2]
 
-# the active function
-actfunc = ""
-scope = "Global"
-for line in codefile:
-    if(actfunc != ""):
-        scope = "Local"
-    
-    # finds the next function
-    if(isFunction(line) == 1):
-        # sets the new active function
-        actfunc = GetFunction(line)
+def GetReferences(varnam):
+    actfunc = ""
+    funcs = []
 
-        print("Line: ", line)
-        print("Line: ", line[:-1])
+    # opening the file again
+    nfile = open("cp10.cpp", 'r')
 
-        print(line)
+    for line in nfile:
+        # finds the next function
+        if(isFunction(line) == 1):
+            # sets the new active function
+            actfunc = GetFunction(line)
 
-        # gets params
-        params = GetParams(line[:-1])
+        # if there are already functions
+        if(len(funcs) > 0):
+            # check if the last added function is equal to the active function
+            if(funcs[-1:][0] == actfunc):
+                # skip onto the next line if there isn't a new function
+                continue
+        
+        # if there isn't an active function
+        if(actfunc == ""):
+            continue
+        
+        # if the variable is in the line
+        if (varnam in line):
+            # finds where the variable starts
+            index = line.find(varnam)
 
-        print("Split: ", line[:-1])
-        print("Params: ", params)
+            # checks if there is a letter after the end of variable, if there is then it isn't a variable on its own
+            if(line[index + len(varnam)].isalpha() == True):
+                continue
+        
+            # if it finds a comment
+            if("\\" in line):
+                # if the variable is found before the comments start
+                if (line.find(varnam) < line.find("\\")):
+                    # append the current function to the list of functions
+                    funcs.append(actfunc)
+            else:
+                # append the current function to the list of functions
+                funcs.append(actfunc)
+                
+    return funcs
+                
+def GetVariables():
+    # the active function
+    actfunc = ""
+    scope = "Global"
+    for line in codefile:
+        if(actfunc != ""):
+            scope = "Local"
+        
+        # finds the next function
+        if(isFunction(line) == 1):
+            # sets the new active function
+            actfunc = GetFunction(line)
 
-        scope = "Parameter"
+            print("Line: ", line)
+            print("Line: ", line[:-1])
 
-        # prints params
-        for param in params:
-            var_names.append(param[1])
-            var_types.append(param[0])
-            var_scope.append(scope)
-            var_funcs.append(actfunc)
-            print(f"{param[1]} {param[0]} {scope} {actfunc}")
-    else:
-        var = []
-        for type in types:
-            if line.startswith(type):
-                var = GetVariable(line) 
+            print(line)
 
-        if(len(var) == 2):
-            var_names.append(var[1])
-            var_types.append(var[0])
-            var_scope.append(scope)
-            var_funcs.append(actfunc)
-            print(f"{var[1]} {var[0]} {scope} {actfunc}")
+            # gets params
+            params = GetParams(line[:-1])
+
+            print("Split: ", line[:-1])
+            print("Params: ", params)
+
+            scope = "Parameter"
+
+            # prints params
+            for param in params:
+                var_names.append(param[1])
+                var_types.append(param[0])
+                var_scope.append(scope)
+                var_funcs.append(actfunc)
+                print(f"{param[1]} {param[0]} {scope} {actfunc}")
+        else:
+            var = []
+            for type in types:
+                if line.startswith(type):
+                    var = GetVariable(line) 
+
+            if(len(var) == 2):
+                var_names.append(var[1])
+                var_types.append(var[0])
+                var_scope.append(scope)
+                var_funcs.append(actfunc)
+                print(f"{var[1]} {var[0]} {scope} {actfunc}")
 
 
-data = {
-    'Variable Name': var_names,
-    'Type': var_types,
-    'Scope': var_scope,
-    'Functions': var_funcs
-}
+    data = {
+        'Variable Name': var_names,
+        'Type': var_types,
+        'Scope': var_scope,
+        'Functions': var_funcs
+    }
 
 
-df = pd.DataFrame(data)
+    df = pd.DataFrame(data)
 
-df.to_excel("Variables.xlsx", index=False)
+    df.to_excel("Variables.xlsx", index=False)
+
+globs = [
+    "ngi", "ngc", "guestno", "gunam", "gucontactnam", "guconttelenum", "guemailaddr",
+    "gugenre", "nei", "nec", "eventno", "evdate", "evtime", "evdur", "evlocation",
+    "evdescription", "evtitle", "evcost", "evcont", "evcontemail", "evcontnum",
+    "nmi", "nmc", "mucatno", "mutitle", "muartist", "mugenre", "mupub", "muplaytime",
+    "mucheck", "mufreq", "nli", "nlc", "evlinkevno", "evlinkdjno", "npi", "npc", "pllinkcatno",
+    "pllinkevno", "djno", "sch", "nui", "nuc", "usrnos", "usernames", "passwords", "loas", "curusr"
+]
+
+
+for glob in globs:
+    fs = GetReferences(glob)
+    outy = ', '.join(fs)
+    print("\n" + glob + ":", outy)
