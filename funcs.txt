@@ -1,1 +1,3 @@
 
+InitialiseDJFile ReadBackGuestFile ReWriteGuestFile ReadBackMusicFile ReWriteMusicFile ReadBackPlaylistFile ReWritePlaylistFile ReadBackUserFile ReWriteUserFile FirstTimeLoad
+ReadBackEventLinksFile ReWriteEventLinksFile ReadBackEventFile ReWriteEventFile ReadBackScheduleFile ReWriteScheduleFile
