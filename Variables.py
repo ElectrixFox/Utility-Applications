@@ -199,11 +199,13 @@ def GetReferences(varnam):
             # checks if there is a letter after the end of variable, if there is then it isn't a variable on its own
             if(line[index + len(varnam)].isalpha() == True):
                 continue
-        
+            elif(line[index - 1].isalpha() == True):
+                continue
+
             # if it finds a comment
-            if("\\" in line):
+            if("//" in line):
                 # if the variable is found before the comments start
-                if (line.find(varnam) < line.find("\\")):
+                if (line.find(varnam) < line.find("//")):
                     # append the current function to the list of functions
                     funcs.append(actfunc)
             else:
@@ -225,16 +227,16 @@ def GetVariables():
             # sets the new active function
             actfunc = GetFunction(line)
 
-            print("Line: ", line)
-            print("Line: ", line[:-1])
+            # print("Line: ", line)
+            # print("Line: ", line[:-1])
 
-            print(line)
+            # print(line)
 
             # gets params
             params = GetParams(line[:-1])
 
-            print("Split: ", line[:-1])
-            print("Params: ", params)
+            # print("Split: ", line[:-1])
+            # print("Params: ", params)
 
             scope = "Parameter"
 
@@ -266,22 +268,26 @@ def GetVariables():
         'Functions': var_funcs
     }
 
+    return data
 
+def CreateVariableTable(data):
     df = pd.DataFrame(data)
-
     df.to_excel("Variables.xlsx", index=False)
 
-globs = [
-    "ngi", "ngc", "guestno", "gunam", "gucontactnam", "guconttelenum", "guemailaddr",
-    "gugenre", "nei", "nec", "eventno", "evdate", "evtime", "evdur", "evlocation",
-    "evdescription", "evtitle", "evcost", "evcont", "evcontemail", "evcontnum",
-    "nmi", "nmc", "mucatno", "mutitle", "muartist", "mugenre", "mupub", "muplaytime",
-    "mucheck", "mufreq", "nli", "nlc", "evlinkevno", "evlinkdjno", "npi", "npc", "pllinkcatno",
-    "pllinkevno", "djno", "sch", "nui", "nuc", "usrnos", "usernames", "passwords", "loas", "curusr"
-]
+def FindGlobalRefs(vars):
+    # looping through all of the variables
+    for i in range(0, len(vars['Scope'])):
+        # if it is a global variable
+        if (vars['Scope'][i] == "Global"):
+            # setting the functions for each global as the functions in which the global is used
+            vars['Functions'][i] = ', '.join(GetReferences(vars['Variable Name'][i]))
+    return vars
 
+variables = GetVariables()
+variables = FindGlobalRefs(variables)
+CreateVariableTable(variables)
 
-for glob in globs:
+""" for glob in globs:
     fs = GetReferences(glob)
     outy = ', '.join(fs)
-    print("\n" + glob + ":", outy)
+    print("\n" + glob + ":", outy) """
